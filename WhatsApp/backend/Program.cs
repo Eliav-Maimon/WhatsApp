@@ -1,6 +1,4 @@
 
-using backend.Settings;
-
 namespace backend
 {
     public class Program

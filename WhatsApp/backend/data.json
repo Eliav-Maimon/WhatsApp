@@ -1,0 +1,47 @@
+[
+    {
+        "Name": "John Doe",
+        "Email": "john.doe@example.com",
+        "Phone": "123456789",
+        "Contacts": [],
+        "IsOnline": true,
+        "Image": "https://example.com/john.jpg",
+        "LastSeen": "2024-05-15T08:00:00Z"
+    },
+    {
+        "Name": "Alice Smith",
+        "Email": "alice.smith@example.com",
+        "Phone": "987654321",
+        "Contacts": [],
+        "IsOnline": false,
+        "Image": "https://example.com/alice.jpg",
+        "LastSeen": "2024-05-14T18:30:00Z"
+    },
+    {
+        "Name": "Bob Johnson",
+        "Email": "bob.johnson@example.com",
+        "Phone": "456123789",
+        "Contacts": [],
+        "IsOnline": true,
+        "Image": "https://example.com/bob.jpg",
+        "LastSeen": "2024-05-15T10:45:00Z"
+    },
+    {
+        "Name": "Emily Davis",
+        "Email": "emily.davis@example.com",
+        "Phone": "987123456",
+        "Contacts": [],
+        "IsOnline": false,
+        "Image": "https://example.com/emily.jpg",
+        "LastSeen": "2024-05-14T21:15:00Z"
+    },
+    {
+        "Name": "Michael Wilson",
+        "Email": "michael.wilson@example.com",
+        "Phone": "321456987",
+        "Contacts": [],
+        "IsOnline": true,
+        "Image": "https://example.com/michael.jpg",
+        "LastSeen": "2024-05-15T07:20:00Z"
+    }
+]
