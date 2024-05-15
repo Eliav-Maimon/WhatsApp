@@ -1,4 +1,6 @@
 
+using backend.Settings;
+
 namespace backend
 {
     public class Program
@@ -14,9 +16,17 @@ namespace backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddMongo();
+
+            builder.Services.AddCors(x => x.AddDefaultPolicy(
+                opts => opts
+                    .WithOrigins("http://127.0.0.1:4200", "http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    ));
+
+
             var app = builder.Build();
-
-
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -25,10 +35,11 @@ namespace backend
                 app.UseSwaggerUI();
             }
 
+            app.UseCors();
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
