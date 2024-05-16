@@ -19,24 +19,8 @@ namespace backend.Controllers
             _mongoDatabase = mongoDatabase;
         }
 
-        [HttpGet("{id:int}")]
-        public ActionResult<User> GetUserByPhone(int id)
-        {
-            // TODO: verify code
-
-            Console.WriteLine(id);
-            var user = _mongoDatabase.GetCollection<User>("Users").Find(u => u._id == id).FirstOrDefault();
-
-            if(user != null)
-            {
-                return Ok(user);
-            }
-            
-            return NotFound();
-        }
-        
-        [HttpGet("{phoneNumber}")]
-        public ActionResult<User> GetUserByPhone(string phoneNumber)
+        [HttpGet("{phoneNumber:int}")]
+        public ActionResult<User> GetUserByPhone(int phoneNumber)
         {
             // TODO: verify code
 
@@ -50,6 +34,23 @@ namespace backend.Controllers
             
             return NotFound();
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<User> GetUserById(string id)
+        {
+            // TODO: verify code
+
+            Console.WriteLine(id);
+            var user = _mongoDatabase.GetCollection<User>("Users").Find(u => u.Id == id).FirstOrDefault();
+
+            if(user != null)
+            {
+                return Ok(user);
+            }
+            
+            return NotFound();
+        }
+        
     }
 
 

@@ -12,7 +12,7 @@ namespace backend.Models
         public string Name { get; set; }
         public string Email { get; set; }
         [RegularExpression("^(?!0{3})[0-9]{9}$")]
-        public string Phone { get; set; }
+        public int Phone { get; set; }
         // public User[] Contacts { get; set; }
         public Dictionary<string, User> Contacts { get; set; }
         public bool IsOnline { get; set; }
