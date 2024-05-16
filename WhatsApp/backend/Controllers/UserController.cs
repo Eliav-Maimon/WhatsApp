@@ -19,8 +19,8 @@ namespace backend.Controllers
             _mongoDatabase = mongoDatabase;
         }
 
-        [HttpGet("{phoneNumber:int}")]
-        public ActionResult<User> GetUserByPhone(int phoneNumber)
+        [HttpGet("{phoneNumber:long}")] //user/123456789
+        public ActionResult<User> GetUserByPhone(uint phoneNumber)
         {
             // TODO: verify code
 
@@ -35,7 +35,7 @@ namespace backend.Controllers
             return NotFound();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] //user/ljfsd58fdf
         public ActionResult<User> GetUserById(string id)
         {
             // TODO: verify code
