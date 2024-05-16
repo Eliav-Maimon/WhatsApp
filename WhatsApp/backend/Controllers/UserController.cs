@@ -19,12 +19,26 @@ namespace backend.Controllers
             _mongoDatabase = mongoDatabase;
         }
 
+        [HttpGet()] //user/
+        public ActionResult<IEnumerable<User>> GetAllUsers()
+        {
+            var usersCollection = _mongoDatabase.GetCollection<User>("Users");
+
+            var users = usersCollection.Find(_ => true).ToList();
+
+            if(users != null)
+            {
+                return Ok(users);
+            }
+            
+            return NotFound();
+        }
+
         [HttpGet("{phoneNumber:long}")] //user/123456789
         public ActionResult<User> GetUserByPhone(long phoneNumber)
         {
             // TODO: verify code
 
-            Console.WriteLine(phoneNumber);
             var user = _mongoDatabase.GetCollection<User>("Users").Find(u => u.Phone == phoneNumber).FirstOrDefault();
 
             if(user != null)
@@ -54,23 +68,18 @@ namespace backend.Controllers
         [HttpPost("{currentUserId}/{contactUserId}")] 
         public ActionResult<User> AddContact(string currentUserId, string contactUserId)
         {
-            
-            Console.WriteLine("currentUserId "+ currentUserId +" contactUserId "+ contactUserId);
             var users = _mongoDatabase.GetCollection<User>("Users");
-
+            //  List<User> result = await users;
             var currentUser = users.Find(u => u.Id == currentUserId).FirstOrDefault();
-            System.Console.WriteLine("currentUser "+ currentUser);
             var contactUser = users.Find(u => u.Id == contactUserId).FirstOrDefault();
-            System.Console.WriteLine("contactUser "+ contactUser);
 
             if(currentUser != null && contactUser != null)
             {
                 currentUser.Contacts.Add(contactUser.Id);
                 
                 var filter = Builders<User>.Filter.Eq(u => u.Id, currentUserId);
-                Console.WriteLine(filter);
                 var update = Builders<User>.Update.Set(u => u.Contacts, currentUser.Contacts);
-                Console.WriteLine(update);
+
                 users.UpdateOne(filter, update);
                 
                 return Ok(currentUser);
@@ -79,17 +88,23 @@ namespace backend.Controllers
             return NotFound();
         }
 
-        [HttpDelete("{id}")] //user/ljfsd58fdf
+        [HttpDelete("{currentUserId}/{contactUserId}")] 
         public ActionResult<User> RemoveContact(string currentUserId, string contactUserId)
         {
-            Console.WriteLine("currentUserId "+ currentUserId +" contactUserId "+ contactUserId);
-            var currentUser = _mongoDatabase.GetCollection<User>("Users").Find(u => u.Id == currentUserId).FirstOrDefault();
-            var contactUser = _mongoDatabase.GetCollection<User>("Users").Find(u => u.Id == contactUserId).FirstOrDefault();
+           var users = _mongoDatabase.GetCollection<User>("Users");
 
-           if(currentUser != null && contactUser != null)
+            var currentUser = users.Find(u => u.Id == currentUserId).FirstOrDefault();
+            var contactUser = users.Find(u => u.Id == contactUserId).FirstOrDefault();
+
+            if(currentUser != null && contactUser != null)
             {
-                // currentUser.Contacts.Remove(contactUser);
-               
+                currentUser.Contacts.Remove(contactUser.Id);
+                
+                var filter = Builders<User>.Filter.Eq(u => u.Id, currentUserId);
+                var update = Builders<User>.Update.Set(u => u.Contacts, currentUser.Contacts);
+                
+                users.UpdateOne(filter, update);
+                
                 return Ok(currentUser);
             }
             
