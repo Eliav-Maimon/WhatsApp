@@ -20,7 +20,7 @@ namespace backend.Controllers
         }
 
         [HttpGet("{phoneNumber:long}")] //user/123456789
-        public ActionResult<User> GetUserByPhone(uint phoneNumber)
+        public ActionResult<User> GetUserByPhone(long phoneNumber)
         {
             // TODO: verify code
 
@@ -46,6 +46,51 @@ namespace backend.Controllers
             if(user != null)
             {
                 return Ok(user);
+            }
+            
+            return NotFound();
+        }
+
+        [HttpPost("{currentUserId}/{contactUserId}")] 
+        public ActionResult<User> AddContact(string currentUserId, string contactUserId)
+        {
+            
+            Console.WriteLine("currentUserId "+ currentUserId +" contactUserId "+ contactUserId);
+            var users = _mongoDatabase.GetCollection<User>("Users");
+
+            var currentUser = users.Find(u => u.Id == currentUserId).FirstOrDefault();
+            System.Console.WriteLine("currentUser "+ currentUser);
+            var contactUser = users.Find(u => u.Id == contactUserId).FirstOrDefault();
+            System.Console.WriteLine("contactUser "+ contactUser);
+
+            if(currentUser != null && contactUser != null)
+            {
+                currentUser.Contacts.Add(contactUser.Id);
+                
+                var filter = Builders<User>.Filter.Eq(u => u.Id, currentUserId);
+                Console.WriteLine(filter);
+                var update = Builders<User>.Update.Set(u => u.Contacts, currentUser.Contacts);
+                Console.WriteLine(update);
+                users.UpdateOne(filter, update);
+                
+                return Ok(currentUser);
+            }
+            
+            return NotFound();
+        }
+
+        [HttpDelete("{id}")] //user/ljfsd58fdf
+        public ActionResult<User> RemoveContact(string currentUserId, string contactUserId)
+        {
+            Console.WriteLine("currentUserId "+ currentUserId +" contactUserId "+ contactUserId);
+            var currentUser = _mongoDatabase.GetCollection<User>("Users").Find(u => u.Id == currentUserId).FirstOrDefault();
+            var contactUser = _mongoDatabase.GetCollection<User>("Users").Find(u => u.Id == contactUserId).FirstOrDefault();
+
+           if(currentUser != null && contactUser != null)
+            {
+                // currentUser.Contacts.Remove(contactUser);
+               
+                return Ok(currentUser);
             }
             
             return NotFound();

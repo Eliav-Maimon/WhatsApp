@@ -11,10 +11,15 @@ namespace backend.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        [RegularExpression("^(?!0{3})[0-9]{9}$")]
+
+        // [RegularExpression("^(?!0{3})[0-9]{9}$")]
         public long Phone { get; set; }
-        // public User[] Contacts { get; set; }
-        public Dictionary<string, User> Contacts { get; set; }
+      
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public List<string> Contacts { get; set; } 
+        // public List<User> Contacts { get; set; }
+        // public Dictionary<string, User> Contacts { get; set; }
         public bool IsOnline { get; set; }
         public string Image { get; set; }
         public DateTime LastSeen { get; set; }
