@@ -1,4 +1,7 @@
 
+using backend.Models;
+using WhatsApp.Repository;
+
 namespace backend
 {
     public class Program
@@ -10,6 +13,7 @@ namespace backend
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IUserRepository<User>, UserMongoRepository>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

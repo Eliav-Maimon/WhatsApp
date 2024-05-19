@@ -2,7 +2,7 @@
     {
         "Name": "John Doe",
         "Email": "john.doe@example.com",
-        "Phone": 123456789,
+        "Phone": "123456789",
         "Contacts": [],
         "IsOnline": true,
         "Image": "https://example.com/john.jpg",
@@ -11,7 +11,7 @@
     {
         "Name": "Alice Smith",
         "Email": "alice.smith@example.com",
-        "Phone": 987654321,
+        "Phone": "987654321",
         "Contacts": [],
         "IsOnline": false,
         "Image": "https://example.com/alice.jpg",
@@ -20,7 +20,7 @@
     {
         "Name": "Bob Johnson",
         "Email": "bob.johnson@example.com",
-        "Phone": 456123789,
+        "Phone": "456123789",
         "Contacts": [],
         "IsOnline": true,
         "Image": "https://example.com/bob.jpg",
@@ -29,7 +29,7 @@
     {
         "Name": "Emily Davis",
         "Email": "emily.davis@example.com",
-        "Phone": 987123456,
+        "Phone": "987123456",
         "Contacts": [],
         "IsOnline": false,
         "Image": "https://example.com/emily.jpg",
@@ -38,7 +38,7 @@
     {
         "Name": "Michael Wilson",
         "Email": "michael.wilson@example.com",
-        "Phone": 321456987,
+        "Phone": "321456987",
         "Contacts": [],
         "IsOnline": true,
         "Image": "https://example.com/michael.jpg",
