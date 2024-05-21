@@ -39,7 +39,7 @@ namespace backend.Controllers
         [HttpGet("{id}")] //user/ljfsd58fdf
         public async Task<ActionResult<User>> GetUserById(string id)
         {
-            var user = await _userRepository.GetByIdAsync(id);
+            var user = await _userRepository.GetUserByIdAsync(id);
             return user == null ? NotFound() : Ok(user);
         }
 

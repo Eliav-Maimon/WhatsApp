@@ -16,13 +16,17 @@ public class UserMongoRepository : IUserRepository<User>
     // check about the async here
     public async Task<IReadOnlyCollection<User>> GetAllAsync()
     {
-        var users = await _mongoDBCollection.Find(_ => true).ToListAsync();
-        return users;
+        return await _mongoDBCollection.Find(_ => true).ToListAsync();
     }
 
-    public async Task<User> GetByIdAsync(string id)
+    public async Task<User> GetUserByIdAsync(string id)
     {
         return await _mongoDBCollection.Find(u => u.Id == id).FirstOrDefaultAsync();
+    }
+
+    public async Task<User> GetUserByEmailAsync(string email)
+    {
+        return await _mongoDBCollection.Find(u => u.Email == email).FirstOrDefaultAsync();
     }
 
     public async Task<User> GetUserByPhoneAsync(string phoneNumber)

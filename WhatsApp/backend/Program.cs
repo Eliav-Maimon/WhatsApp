@@ -1,5 +1,7 @@
 
 using backend.Models;
+using backend.Repository.VerifyCodeRepository;
+using backend.Services;
 using WhatsApp.Repository;
 
 namespace backend
@@ -14,6 +16,8 @@ namespace backend
 
             builder.Services.AddControllers();
             builder.Services.AddScoped<IUserRepository<User>, UserMongoRepository>();
+            builder.Services.AddScoped<IVerifyRepository<VerifyCode>, VerifyRepository>();
+            builder.Services.AddScoped<IVerifyCodeService, EmailService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
