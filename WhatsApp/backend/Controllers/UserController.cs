@@ -20,7 +20,7 @@ namespace backend.Controllers
             _userRepository = mongoDatabase;
         }
 
-        [HttpGet("users")] //user/qqqqqq
+        [HttpGet("users")] //user/
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             var users = await _userRepository.GetAllAsync();
