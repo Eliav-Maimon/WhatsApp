@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using WhatsApp.Repository;
@@ -43,6 +44,7 @@ namespace backend.Controllers
             return user == null ? NotFound() : Ok(user);
         }
 
+        [Authorize]
         [HttpPost("{currentUserId}/{contactUserId}")]
         public async Task<ActionResult<User>> AddContact(string currentUserId, string contactUserId)
         {
@@ -50,6 +52,7 @@ namespace backend.Controllers
             return user == null ? NotFound() : Ok(user);
         }
 
+        [Authorize]
         [HttpDelete("{currentUserId}/{contactUserId}")]
         public async Task<ActionResult<User>> RemoveContact(string currentUserId, string contactUserId)
         {
@@ -68,6 +71,7 @@ namespace backend.Controllers
             return BadRequest(ModelState);
         }
 
+        [Authorize]
         [HttpDelete]
         public async Task<ActionResult<User>> RemoveUser([FromBody] string id)
         {

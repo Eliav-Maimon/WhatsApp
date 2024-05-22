@@ -11,6 +11,6 @@ namespace backend.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
         public int CodeNumber { get; set; }
-        public DateTime CreatedTime { get; set; } = DateTime.Now.Date;
+        public DateTime CreatedTime { get; set; } = DateTime.UtcNow;
     }
 }

@@ -9,5 +9,6 @@ namespace backend.Services
     {
         Task SendCodeAsync(string to, string subject, string text);
         int GenerateVerificationCode(int length);
+        string GenerateJwtToken(string userId);
     }
 }

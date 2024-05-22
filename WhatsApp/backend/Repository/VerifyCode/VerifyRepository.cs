@@ -34,7 +34,7 @@ namespace backend.Repository.VerifyCodeRepository
             var filter = Builders<VerifyCode>.Filter.Eq(v => v.Id, id);
 
             var update = Builders<VerifyCode>.Update
-                .Set(v => v.CreatedTime, DateTime.Now.Date)
+                .Set(v => v.CreatedTime, DateTime.UtcNow)
                 .Set(v => v.CodeNumber, code);
 
             var result = await _mongoDBCollection.FindOneAndUpdateAsync(

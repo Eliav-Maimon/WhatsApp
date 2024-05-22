@@ -24,13 +24,9 @@ namespace backend
 
             builder.Services.AddMongo();
 
-            builder.Services.AddCors(x => x.AddDefaultPolicy(
-                opts => opts
-                    .WithOrigins("http://127.0.0.1:4200", "http://localhost:4200")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    ));
+            builder.Services.AddMyCors();
 
+            builder.Services.AddMyAuthentication(builder.Configuration);
 
             var app = builder.Build();
 
@@ -44,7 +40,11 @@ namespace backend
             app.UseCors();
 
             app.UseHttpsRedirection();
+            
+            // Authentication = אימות
+            app.UseAuthentication();
 
+            // Authorization = הרשאה
             app.UseAuthorization();
 
             app.MapControllers();

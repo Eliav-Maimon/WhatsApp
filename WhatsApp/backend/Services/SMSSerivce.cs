@@ -11,5 +11,10 @@ namespace backend.Services
         {
             throw new NotImplementedException();
         }
+
+        public string GenerateJwtToken(string userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
