@@ -17,7 +17,9 @@ namespace backend
             builder.Services.AddControllers();
             builder.Services.AddScoped<IUserRepository<User>, UserMongoRepository>();
             builder.Services.AddScoped<IVerifyRepository<VerifyCode>, VerifyRepository>();
-            builder.Services.AddScoped<IVerifyCodeService, EmailService>();
+            builder.Services.AddScoped<IVerifyCodeService<VerifyCode>, VerifyCodeService>();
+            builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

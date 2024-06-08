@@ -44,7 +44,7 @@ namespace backend.Controllers
             return user == null ? NotFound() : Ok(user);
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpPost("{currentUserId}/{contactUserId}")]
         public async Task<ActionResult<User>> AddContact(string currentUserId, string contactUserId)
         {
@@ -52,7 +52,7 @@ namespace backend.Controllers
             return user == null ? NotFound() : Ok(user);
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpDelete("{currentUserId}/{contactUserId}")]
         public async Task<ActionResult<User>> RemoveContact(string currentUserId, string contactUserId)
         {
@@ -71,7 +71,7 @@ namespace backend.Controllers
             return BadRequest(ModelState);
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpDelete]
         public async Task<ActionResult<User>> RemoveUser([FromBody] string id)
         {
